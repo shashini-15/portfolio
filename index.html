@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shashini Shashikala | Computer Systems Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0f1a;
+    --bg2: #0f1625;
+    --bg3: #141c2e;
+    --surface: #1a2438;
+    --surface2: #1f2d45;
+    --accent: #00d4ff;
+    --accent2: #7c6bff;
+    --accent3: #00ffb3;
+    --text: #e8edf5;
+    --muted: #7a8ba8;
+    --border: rgba(255,255,255,0.06);
+    --border2: rgba(0,212,255,0.2);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 5%;
+    background: rgba(10,15,26,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.1rem;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.88rem; font-weight: 500;
+    letter-spacing: 0.02em; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 8rem 5% 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center;
+    max-width: 1200px; margin: 0 auto; width: 100%;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,212,255,0.08);
+    border: 1px solid var(--border2);
+    padding: 6px 14px; border-radius: 100px;
+    font-size: 0.78rem; font-weight: 500;
+    color: var(--accent); letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 1.5rem;
+  }
+  .hero-tag::before {
+    content: ''; width: 6px; height: 6px;
+    background: var(--accent); border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800; line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+  }
+  .hero-name span { color: var(--accent); }
+  .hero-title {
+    font-size: 1.1rem; color: var(--muted);
+    font-weight: 300; margin-bottom: 1.5rem;
+    letter-spacing: 0.01em;
+  }
+  .hero-desc {
+    font-size: 0.95rem; color: var(--muted);
+    line-height: 1.8; margin-bottom: 2.5rem;
+    max-width: 480px;
+  }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent); color: #0a0f1a;
+    padding: 0.75rem 1.75rem; border-radius: 8px;
+    font-weight: 600; font-size: 0.9rem;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .btn-primary:hover { background: #00bbdd; transform: translateY(-2px); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent;
+    border: 1px solid var(--border2);
+    color: var(--text);
+    padding: 0.75rem 1.75rem; border-radius: 8px;
+    font-weight: 500; font-size: 0.9rem;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  /* HERO VISUAL */
+  .hero-visual {
+    display: flex; justify-content: center; align-items: center;
+    position: relative;
+  }
+  .hero-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem;
+    width: 100%; max-width: 360px;
+    position: relative;
+  }
+  .hero-card::before {
+    content: '';
+    position: absolute; inset: -1px;
+    border-radius: 21px;
+    background: linear-gradient(135deg, rgba(0,212,255,0.3), transparent 50%, rgba(124,107,255,0.2));
+    z-index: -1;
+  }
+  .avatar-ring {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem; font-weight: 800; color: #0a0f1a;
+    margin-bottom: 1rem;
+  }
+  .card-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; }
+  .card-role { color: var(--accent); font-size: 0.82rem; font-weight: 500; margin-bottom: 1.5rem; }
+  .stat-row { display: flex; gap: 1rem; margin-top: 1rem; }
+  .stat-box {
+    flex: 1; background: var(--bg3);
+    border-radius: 10px; padding: 0.75rem;
+    text-align: center;
+  }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--accent); }
+  .stat-lbl { font-size: 0.7rem; color: var(--muted); }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1rem; }
+  .pill {
+    background: var(--bg3); border: 1px solid var(--border);
+    color: var(--muted); font-size: 0.72rem;
+    padding: 3px 10px; border-radius: 100px;
+  }
+
+  /* GLOW BG */
+  .glow {
+    position: absolute; border-radius: 50%;
+    filter: blur(80px); opacity: 0.12; pointer-events: none;
+  }
+  .glow-1 { width: 500px; height: 500px; background: var(--accent); top: -100px; right: -100px; }
+  .glow-2 { width: 400px; height: 400px; background: var(--accent2); bottom: -100px; left: -100px; }
+
+  /* SECTIONS */
+  section { padding: 6rem 5%; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 700; letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+  .section-sub { color: var(--muted); max-width: 560px; font-size: 0.95rem; margin-bottom: 3rem; }
+
+  /* ABOUT */
+  #about { background: var(--bg2); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: start;
+  }
+  .about-text p { color: var(--muted); font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.9; }
+  .info-list { list-style: none; margin-top: 1.5rem; }
+  .info-list li {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+  .info-list .lbl { color: var(--muted); min-width: 80px; font-size: 0.8rem; }
+  .info-list .val { color: var(--text); }
+  .soft-skills { margin-top: 2rem; }
+  .soft-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 1rem; }
+  .soft-grid { display: flex; flex-direction: column; gap: 10px; }
+  .soft-item { display: flex; align-items: center; gap: 12px; font-size: 0.85rem; color: var(--muted); }
+  .soft-dot { width: 6px; height: 6px; background: var(--accent3); border-radius: 50%; flex-shrink: 0; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { border-color: var(--border2); transform: translateY(-4px); }
+  .skill-cat-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; margin-bottom: 1rem;
+  }
+  .icon-blue { background: rgba(0,212,255,0.1); }
+  .icon-purple { background: rgba(124,107,255,0.1); }
+  .icon-green { background: rgba(0,255,179,0.1); }
+  .icon-amber { background: rgba(255,190,11,0.1); }
+  .skill-cat-name { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.95rem; margin-bottom: 0.75rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-tag {
+    background: var(--bg3); color: var(--muted);
+    font-size: 0.75rem; padding: 4px 10px; border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+
+  /* PROJECTS */
+  #projects { background: var(--bg2); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem; }
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 2rem;
+    display: flex; flex-direction: column;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .project-card::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0; transition: opacity 0.2s;
+  }
+  .project-card:hover { border-color: var(--border2); transform: translateY(-4px); }
+  .project-card:hover::after { opacity: 1; }
+  .project-year {
+    font-size: 0.72rem; color: var(--muted);
+    font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 0.75rem;
+  }
+  .project-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem; font-weight: 700;
+    margin-bottom: 0.75rem; line-height: 1.3;
+  }
+  .project-desc { color: var(--muted); font-size: 0.88rem; line-height: 1.7; flex: 1; margin-bottom: 1.5rem; }
+  .project-tech { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tech-tag {
+    background: rgba(0,212,255,0.08);
+    border: 1px solid rgba(0,212,255,0.15);
+    color: var(--accent); font-size: 0.72rem;
+    padding: 3px 10px; border-radius: 6px;
+    font-weight: 500;
+  }
+  .project-badge {
+    position: absolute; top: 1.5rem; right: 1.5rem;
+    background: rgba(0,255,179,0.1);
+    border: 1px solid rgba(0,255,179,0.2);
+    color: var(--accent3); font-size: 0.68rem;
+    padding: 3px 8px; border-radius: 100px;
+    font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+  }
+
+  /* EDUCATION */
+  .edu-timeline { display: flex; flex-direction: column; gap: 1.5rem; }
+  .edu-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.75rem;
+    display: flex; gap: 1.5rem; align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+  .edu-card:hover { border-color: var(--border2); }
+  .edu-dot {
+    width: 44px; height: 44px; flex-shrink: 0;
+    background: var(--bg3); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: 1rem; color: var(--accent);
+  }
+  .edu-degree { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.95rem; }
+  .edu-school { color: var(--accent); font-size: 0.85rem; margin: 2px 0; }
+  .edu-period { color: var(--muted); font-size: 0.8rem; }
+
+  /* CERTIFICATIONS */
+  #certifications { background: var(--bg2); }
+  .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+  .cert-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.25rem 1.5rem;
+    display: flex; align-items: flex-start; gap: 1rem;
+    transition: border-color 0.2s;
+  }
+  .cert-card:hover { border-color: var(--border2); }
+  .cert-icon {
+    width: 36px; height: 36px; flex-shrink: 0;
+    background: rgba(124,107,255,0.1);
+    border-radius: 8px; display: flex;
+    align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+  .cert-name { font-weight: 600; font-size: 0.88rem; margin-bottom: 2px; }
+  .cert-issuer { color: var(--muted); font-size: 0.78rem; }
+  .cert-date { color: var(--accent2); font-size: 0.75rem; margin-top: 4px; }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: start;
+  }
+  .contact-text p { color: var(--muted); font-size: 0.95rem; line-height: 1.9; margin-bottom: 2rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 1rem 1.25rem;
+    text-decoration: none; color: var(--text);
+    transition: all 0.2s;
+  }
+  .contact-link:hover { border-color: var(--border2); transform: translateX(4px); }
+  .contact-link-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .contact-link-label { font-size: 0.75rem; color: var(--muted); }
+  .contact-link-val { font-size: 0.88rem; font-weight: 500; }
+  .contact-form-area {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 2rem;
+  }
+  .form-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; margin-bottom: 1.5rem; }
+  .form-group { margin-bottom: 1.25rem; }
+  label { display: block; font-size: 0.8rem; color: var(--muted); margin-bottom: 6px; font-weight: 500; }
+  input, textarea {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 0.7rem 1rem;
+    color: var(--text); font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; outline: none;
+    transition: border-color 0.2s;
+  }
+  input:focus, textarea:focus { border-color: var(--border2); }
+  textarea { resize: vertical; min-height: 100px; }
+  .form-btn {
+    width: 100%; background: var(--accent);
+    color: #0a0f1a; border: none;
+    padding: 0.8rem; border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600; font-size: 0.9rem;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .form-btn:hover { background: #00bbdd; transform: translateY(-1px); }
+
+  /* FOOTER */
+  footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 2rem 5%;
+    text-align: center;
+    color: var(--muted); font-size: 0.85rem;
+  }
+  footer span { color: var(--accent); }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px; background: var(--border);
+    max-width: 1200px; margin: 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    nav { padding: 1rem 4%; }
+    .nav-links { gap: 1.2rem; }
+    .nav-links a { font-size: 0.8rem; }
+    section { padding: 4rem 4%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">SS</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+  <div class="hero-grid">
+    <div class="hero-content">
+      <div class="hero-tag">Available for opportunities</div>
+      <h1 class="hero-name">Shashini<br><span>Shashikala</span></h1>
+      <p class="hero-title">Computer Systems Engineering Undergraduate · SLIIT</p>
+      <p class="hero-desc">
+        Passionate about embedded systems, control systems, and full-stack development. 
+        Building real-world hardware–software solutions from PID motor controllers to pharmacy management platforms.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn-primary">View Projects →</a>
+        <a href="mailto:shashinishashikala15@gmail.com" class="btn-secondary">Get In Touch</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="avatar-ring">SS</div>
+        <div class="card-name">Shashini Shashikala</div>
+        <div class="card-role">BSc(Hons) Computer Systems Engineering</div>
+        <div class="skill-pills">
+          <span class="pill">Python</span>
+          <span class="pill">Raspberry Pi</span>
+          <span class="pill">Arduino</span>
+          <span class="pill">Spring Boot</span>
+          <span class="pill">React</span>
+          <span class="pill">PID Control</span>
+        </div>
+        <div class="stat-row">
+          <div class="stat-box">
+            <div class="stat-num">3</div>
+            <div class="stat-lbl">Projects</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">4</div>
+            <div class="stat-lbl">Certifications</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">3rd</div>
+            <div class="stat-lbl">Year</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-label">About Me</div>
+        <h2 class="section-title">Engineer. Problem Solver. Builder.</h2>
+        <p>
+          I'm a motivated 3rd Year Computer Systems Engineering undergraduate at SLIIT, Sri Lanka, with hands-on experience spanning embedded systems, control systems, and full-stack web development.
+        </p>
+        <p>
+          I've designed and implemented real-world projects including PID-based motor control systems running on Raspberry Pi, an autonomous line-following robot using Arduino with C and Assembly, and a full-stack pharmacy management system built with Spring Boot and React.
+        </p>
+        <p>
+          I'm seeking a Systems Engineer role where I can apply my technical knowledge and problem-solving mindset to develop efficient, reliable, and scalable engineering solutions.
+        </p>
+        <ul class="info-list">
+          <li><span class="lbl">Location</span><span class="val">Ruggahawila, Sri Lanka</span></li>
+          <li><span class="lbl">Phone</span><span class="val">078 - 2476952</span></li>
+          <li><span class="lbl">Email</span><span class="val">shashinishashikala15@gmail.com</span></li>
+          <li><span class="lbl">University</span><span class="val">SLIIT, Malabe</span></li>
+          <li><span class="lbl">Degree</span><span class="val">BSc(Hons) Computer Systems Engineering</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="soft-skills">
+          <div class="section-label">Soft Skills</div>
+          <div class="soft-grid" style="margin-top:1rem;">
+            <div class="soft-item"><span class="soft-dot"></span>Time and Task Management</div>
+            <div class="soft-item"><span class="soft-dot"></span>Effective Communication</div>
+            <div class="soft-item"><span class="soft-dot"></span>Adaptability and Quick Learning</div>
+            <div class="soft-item"><span class="soft-dot"></span>Teamwork and Collaboration</div>
+            <div class="soft-item"><span class="soft-dot"></span>Problem-Solving and Analytical Thinking</div>
+            <div class="soft-item"><span class="soft-dot"></span>Attention to Detail</div>
+          </div>
+        </div>
+        <div style="margin-top: 2.5rem;">
+          <div class="section-label">Connect</div>
+          <div style="display:flex; flex-direction:column; gap: 0.75rem; margin-top: 1rem;">
+            <a href="https://github.com/it23619562" target="_blank" class="contact-link" style="padding: 0.8rem 1rem;">
+              <div class="contact-link-icon" style="background: rgba(255,255,255,0.05);">⌥</div>
+              <div>
+                <div class="contact-link-label">GitHub</div>
+                <div class="contact-link-val">github.com/it23619562</div>
+              </div>
+            </a>
+            <a href="https://linkedin.com/in/shashini-shashikala-37a04b395/" target="_blank" class="contact-link" style="padding: 0.8rem 1rem;">
+              <div class="contact-link-icon" style="background: rgba(0,119,181,0.1);">in</div>
+              <div>
+                <div class="contact-link-label">LinkedIn</div>
+                <div class="contact-link-val">shashini-shashikala-37a04b395</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label">Technical Skills</div>
+    <h2 class="section-title">What I Work With</h2>
+    <p class="section-sub">A blend of hardware and software skills built through real project experience.</p>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-cat-icon icon-blue">💻</div>
+        <div class="skill-cat-name">Programming Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">C</span>
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">SQL</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat-icon icon-green">🔌</div>
+        <div class="skill-cat-name">Embedded Systems</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Raspberry Pi</span>
+          <span class="skill-tag">Arduino</span>
+          <span class="skill-tag">AVR Concepts</span>
+          <span class="skill-tag">Sensor Integration</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat-icon icon-amber">⚙️</div>
+        <div class="skill-cat-name">Control Systems</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PID Control</span>
+          <span class="skill-tag">Feedback Systems</span>
+          <span class="skill-tag">Real-Time Control</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat-icon icon-purple">🌐</div>
+        <div class="skill-cat-name">Web Development</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Spring Boot</span>
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">REST APIs</span>
+          <span class="skill-tag">HTML</span>
+          <span class="skill-tag">CSS</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat-icon icon-blue">🗄️</div>
+        <div class="skill-cat-name">Databases & Tools</div>
+        <div class="skill-tags">
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">Linux</span>
+          <span class="skill-tag">GitHub</span>
+          <span class="skill-tag">VS Code</span>
+          <span class="skill-tag">Eclipse</span>
+          <span class="skill-tag">GCP</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat-icon icon-green">🧠</div>
+        <div class="skill-cat-name">Concepts</div>
+        <div class="skill-tags">
+          <span class="skill-tag">System Integration</span>
+          <span class="skill-tag">HW-SW Interfacing</span>
+          <span class="skill-tag">Automation</span>
+          <span class="skill-tag">AI/ML Fundamentals</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-label">Projects</div>
+    <h2 class="section-title">Things I've Built</h2>
+    <p class="section-sub">All systems tested on real hardware, optimized for reliability and real-time operation.</p>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-badge">Hardware</div>
+        <div class="project-year">April 2026</div>
+        <div class="project-name">PID Controlled DC Motor Speed Stabilization System</div>
+        <div class="project-desc">
+          A PID-based DC motor speed control system using Raspberry Pi on Linux. Implemented real-time Python control logic with sensor feedback for closed-loop speed monitoring. Tuned Kp, Ki, Kd parameters for stable performance and minimized steady-state error.
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">Raspberry Pi</span>
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">PID Control</span>
+          <span class="tech-tag">Linux</span>
+          <span class="tech-tag">Sensor Integration</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-badge">Robotics</div>
+        <div class="project-year">April 2026</div>
+        <div class="project-name">Autonomous Line-Following & Parking Robot with Obstacle Detection</div>
+        <div class="project-desc">
+          Arduino-based autonomous robot implementing line following, obstacle detection, and precision parking. Built a priority-based control system using C and Assembly. Integrated IR and ultrasonic sensors for navigation and collision avoidance with L298N motor control.
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">Arduino</span>
+          <span class="tech-tag">C</span>
+          <span class="tech-tag">Assembly</span>
+          <span class="tech-tag">IR Sensors</span>
+          <span class="tech-tag">Ultrasonic</span>
+          <span class="tech-tag">L298N</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-badge">Full-Stack</div>
+        <div class="project-year">March 2025</div>
+        <div class="project-name">Pharmacy Management System</div>
+        <div class="project-desc">
+          Full-stack web application for a real-world pharmacy client. Built RESTful APIs for user management, inventory control, and order processing. Implemented role-based authentication (Admin, Pharmacist, Customer), prescription handling, stock management, and reporting dashboards.
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">Spring Boot</span>
+          <span class="tech-tag">React</span>
+          <span class="tech-tag">MySQL</span>
+          <span class="tech-tag">REST APIs</span>
+          <span class="tech-tag">GitHub</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-badge">Automation</div>
+        <div class="project-year">January 2024</div>
+        <div class="project-name">Automated Classroom Attendance Indicating System</div>
+        <div class="project-desc">
+          Designed an automated system to track and manage classroom attendance efficiently, reducing manual effort and improving accuracy.
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">Embedded Systems</span>
+          <span class="tech-tag">Automation</span>
+          <span class="tech-tag">Sensors</span>
+        </div>
+      </div>
+      
+      <div class="project-card">
+        <div class="project-badge">Digital Logic</div>
+        <div class="project-year">2024</div>
+        <div class="project-name">Traffic Light Control System</div>
+        <div class="project-desc">
+          Designed and implemented a traffic light controller using digital logic concepts to simulate real-world traffic signal operations.
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">Digital Logic</span>
+          <span class="tech-tag">Circuit Design</span>
+          <span class="tech-tag">Simulation</span>
+        </div>
+      </div>
+      
+      <div class="project-card">
+        <div class="project-badge">Research</div>
+        <div class="project-year">2025</div>
+        <div class="project-name">Impact of Social Media Usage on Mental Well-being</div>
+        <div class="project-desc">
+          Conducted a research study analyzing the effects of social media usage on mental health among university students, including data collection and evaluation.
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">Research</span>
+          <span class="tech-tag">Data Analysis</span>
+          <span class="tech-tag">Survey</span>
+        </div>
+      </div>
+      
+      <div class="project-card">
+        <div class="project-badge">Electronics</div>
+        <div class="project-year">2024</div>
+        <div class="project-name">AM Broadcast Receiver</div>
+        <div class="project-desc">
+          Built and tested the audio output circuit of a basic AM broadcast receiver, focusing on signal amplification and sound clarity.
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">Analog Electronics</span>
+          <span class="tech-tag">Signal Processing</span>
+        </div>
+      </div>
+      
+      <div class="project-card">
+        <div class="project-badge">Simulation</div>
+        <div class="project-year">2025</div>
+        <div class="project-name">Adaptive Modulation Simulation</div>
+        <div class="project-desc">
+          Simulated adaptive modulation techniques under varying wireless channel conditions to evaluate system performance and efficiency.
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">MATLAB</span>
+          <span class="tech-tag">Wireless Communication</span>
+          <span class="tech-tag">Simulation</span>
+        </div>
+      </div>
+      
+      <div class="project-card">
+        <div class="project-badge">Digital Systems</div>
+        <div class="project-year">2024</div>
+        <div class="project-name">Ripple Counter Using D Flip-Flops</div>
+        <div class="project-desc">
+          Designed and implemented a ripple counter using D flip-flops to demonstrate sequential logic and counting operations.
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">Flip-Flops</span>
+          <span class="tech-tag">Sequential Logic</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <div class="section-label">Education</div>
+    <h2 class="section-title">Academic Background</h2>
+    <p class="section-sub" style="margin-bottom: 2rem;">My educational journey in technology and engineering.</p>
+    <div class="edu-timeline">
+      <div class="edu-card">
+        <div class="edu-dot">01</div>
+        <div>
+          <div class="edu-degree">BSc(Hons) Computer Systems Engineering</div>
+          <div class="edu-school">Sri Lanka Institute of Information Technology (SLIIT)</div>
+          <div class="edu-period">Dec 2023 – Expected Dec 2027 · Malabe, Sri Lanka</div>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-dot">02</div>
+        <div>
+          <div class="edu-degree">Diploma in Information Technology</div>
+          <div class="edu-school">Esoft Metro College</div>
+          <div class="edu-period">Jan 2022 – Jan 2023 · Nittambuwa, Sri Lanka</div>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-dot">03</div>
+        <div>
+          <div class="edu-degree">G.C.E Advanced Level</div>
+          <div class="edu-school">WP/GM Sri Sangabodhi National College</div>
+          <div class="edu-period">Jan 2017 – Jan 2020 · Nittambuwa, Sri Lanka</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-inner">
+    <div class="section-label">Certifications</div>
+    <h2 class="section-title">Credentials</h2>
+    <p class="section-sub" style="margin-bottom: 2rem;">Professional certifications and completed courses.</p>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-icon">🏅</div>
+        <div>
+          <div class="cert-name">Assured Diploma in IT (DITEC)</div>
+          <div class="cert-issuer">Pearson Certification</div>
+          <div class="cert-date">May 2024</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🎓</div>
+        <div>
+          <div class="cert-name">Diploma in Information Technology</div>
+          <div class="cert-issuer">Esoft Metro College</div>
+          <div class="cert-date">June 2024</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🐍</div>
+        <div>
+          <div class="cert-name">Python for Beginners and Programming</div>
+          <div class="cert-issuer">University of Moratuwa</div>
+          <div class="cert-date">Dec 2025</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🤖</div>
+        <div>
+          <div class="cert-name">AI/ML Engineer Training</div>
+          <div class="cert-issuer">SLIIT</div>
+          <div class="cert-date">Dec 2025</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="contact-text">
+        <div class="section-label">Contact</div>
+        <h2 class="section-title">Let's Connect</h2>
+        <p>I'm open to internship opportunities, project collaborations, and engineering roles. Feel free to reach out — I'd love to hear from you!</p>
+        <div class="contact-links">
+          <a href="mailto:shashinishashikala15@gmail.com" class="contact-link">
+            <div class="contact-link-icon" style="background: rgba(234,67,53,0.1);">✉</div>
+            <div>
+              <div class="contact-link-label">Email</div>
+              <div class="contact-link-val">shashinishashikala15@gmail.com</div>
+            </div>
+          </a>
+          <a href="tel:0782476952" class="contact-link">
+            <div class="contact-link-icon" style="background: rgba(0,212,255,0.08);">📞</div>
+            <div>
+              <div class="contact-link-label">Phone</div>
+              <div class="contact-link-val">078 - 2476952</div>
+            </div>
+          </a>
+          <a href="https://linkedin.com/in/shashini-shashikala-37a04b395/" target="_blank" class="contact-link">
+            <div class="contact-link-icon" style="background: rgba(0,119,181,0.1);">in</div>
+            <div>
+              <div class="contact-link-label">LinkedIn</div>
+              <div class="contact-link-val">linkedin.com/in/shashini-shashikala</div>
+            </div>
+          </a>
+          <a href="https://github.com/it23619562" target="_blank" class="contact-link">
+            <div class="contact-link-icon" style="background: rgba(255,255,255,0.05);">⌥</div>
+            <div>
+              <div class="contact-link-label">GitHub</div>
+              <div class="contact-link-val">github.com/it23619562</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="contact-form-area">
+        <div class="form-title">Send a Message</div>
+        <div class="form-group">
+          <label for="fname">Your Name</label>
+          <input type="text" id="fname" placeholder="Jane Smith">
+        </div>
+        <div class="form-group">
+          <label for="femail">Your Email</label>
+          <input type="email" id="femail" placeholder="jane@example.com">
+        </div>
+        <div class="form-group">
+          <label for="fmsg">Message</label>
+          <textarea id="fmsg" placeholder="Hi Shashini, I'd love to connect about..."></textarea>
+        </div>
+        <button class="form-btn" onclick="this.textContent='Message Sent ✓'; this.style.background='var(--accent3)'; this.style.color='#0a0f1a';">Send Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Designed & built by <span>Shashini Shashikala</span> · Computer Systems Engineering · SLIIT Sri Lanka · 2025</p>
+</footer>
+
+</body>
+</html>
