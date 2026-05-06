@@ -65,6 +65,23 @@
     padding: 8rem 5% 4rem;
     position: relative; overflow: hidden;
   }
+ .hero-profile {
+  width: 110px;
+  height: 110px;
+  margin-bottom: 1.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--accent);
+}
+
+.hero-profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+ .hero-profile {
+  box-shadow: 0 0 20px rgba(0,212,255,0.4);
+}
   .hero-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -432,6 +449,9 @@
   <div class="glow glow-2"></div>
   <div class="hero-grid">
     <div class="hero-content">
+       <div class="hero-profile">
+    <img src="images/my-image.jpeg" alt="Shashini" />
+  </div>
       <div class="hero-tag">Available for opportunities</div>
       <h1 class="hero-name">Shashini<br><span>Shashikala</span></h1>
       <p class="hero-title">Computer Systems Engineering Undergraduate · SLIIT</p>
